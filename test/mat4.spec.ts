@@ -1,92 +1,101 @@
-import { expect } from 'chai'
-import 'mocha'
+import {
+  assertAlmostEquals,
+  assertEquals,
+} from "https://deno.land/std@0.180.0/testing/asserts.ts";
 
-import mat4 from '../src/mat4'
+import mat4 from "../src/mat4.ts";
 
-import { epsilon } from '../src/constants'
+import { epsilon } from "../src/constants.ts";
 
-describe('mat4', () => {
-
-  it('transposes', () => {
+Deno.test("mat4", async (t) => {
+  await t.step("transposes", () => {
     const matrix = new mat4([
-        1.0, 2.0, 3.0, 4.0,
-        5.0, 6.0, 7.0, 8.0,
-        9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0,
-    ])
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+    ]);
 
-    matrix.transpose()
+    matrix.transpose();
 
-    expect(matrix.at(0)).to.equal(1.0)
-    expect(matrix.at(1)).to.equal(5.0)
-    expect(matrix.at(2)).to.equal(9.0)
-    expect(matrix.at(3)).to.equal(13.0)
+    assertEquals(matrix.at(0), 1.0);
+    assertEquals(matrix.at(1), 5.0);
+    assertEquals(matrix.at(2), 9.0);
+    assertEquals(matrix.at(3), 13.0);
 
-    expect(matrix.at(4)).to.equal(2.0)
-    expect(matrix.at(5)).to.equal(6.0)
-    expect(matrix.at(6)).to.equal(10.0)
-    expect(matrix.at(7)).to.equal(14.0)
+    assertEquals(matrix.at(4), 2.0);
+    assertEquals(matrix.at(5), 6.0);
+    assertEquals(matrix.at(6), 10.0);
+    assertEquals(matrix.at(7), 14.0);
 
-    expect(matrix.at(8)).to.equal(3.0)
-    expect(matrix.at(9)).to.equal(7.0)
-    expect(matrix.at(10)).to.equal(11.0)
-    expect(matrix.at(11)).to.equal(15.0)
+    assertEquals(matrix.at(8), 3.0);
+    assertEquals(matrix.at(9), 7.0);
+    assertEquals(matrix.at(10), 11.0);
+    assertEquals(matrix.at(11), 15.0);
 
-    expect(matrix.at(12)).to.equal(4.0)
-    expect(matrix.at(13)).to.equal(8.0)
-    expect(matrix.at(14)).to.equal(12.0)
-    expect(matrix.at(15)).to.equal(16.0)
+    assertEquals(matrix.at(12), 4.0);
+    assertEquals(matrix.at(13), 8.0);
+    assertEquals(matrix.at(14), 12.0);
+    assertEquals(matrix.at(15), 16.0);
+  });
 
-  })
+  await t.step("computes perspective projection", () => {
+    const matrix = mat4.perspective(45, 1, 1, 100);
 
-  it('computes perspective projection', () => {
-    const matrix = mat4.perspective(45, 1, 1, 100)
+    assertAlmostEquals(matrix.at(0), 2.414213, epsilon);
+    assertEquals(matrix.at(1), 0.0);
+    assertEquals(matrix.at(2), 0.0);
+    assertEquals(matrix.at(3), 0.0);
 
-    expect(matrix.at(0)).to.be.approximately(2.414213, epsilon)
-    expect(matrix.at(1)).to.equal(0.0)
-    expect(matrix.at(2)).to.equal(0.0)
-    expect(matrix.at(3)).to.equal(0.0)
+    assertEquals(matrix.at(4), 0.0);
+    assertAlmostEquals(matrix.at(5), 2.414213, epsilon);
+    assertEquals(matrix.at(6), 0.0);
+    assertEquals(matrix.at(7), 0.0);
 
-    expect(matrix.at(4)).to.equal(0.0)
-    expect(matrix.at(5)).to.be.approximately(2.414213, epsilon)
-    expect(matrix.at(6)).to.equal(0.0)
-    expect(matrix.at(7)).to.equal(0.0)
+    assertEquals(matrix.at(8), 0.0);
+    assertEquals(matrix.at(9), 0.0);
+    assertAlmostEquals(matrix.at(10), -1.02020, epsilon);
+    assertEquals(matrix.at(11), -1.0);
 
-    expect(matrix.at(8)).to.equal(0.0)
-    expect(matrix.at(9)).to.equal(0.0)
-    expect(matrix.at(10)).to.be.approximately(-1.02020, epsilon)
-    expect(matrix.at(11)).to.equal(-1.0)
+    assertEquals(matrix.at(12), 0.0);
+    assertEquals(matrix.at(13), 0.0);
+    assertAlmostEquals(matrix.at(14), -2.02020, epsilon);
+    assertEquals(matrix.at(15), 0.0);
+  });
 
-    expect(matrix.at(12)).to.equal(0.0)
-    expect(matrix.at(13)).to.equal(0.0)
-    expect(matrix.at(14)).to.be.approximately(-2.02020, epsilon)
-    expect(matrix.at(15)).to.equal(0.0)
+  await t.step("computes orthographic projection", () => {
+    const matrix = mat4.orthographic(0, 800, 0, 600, 1, 100);
 
-  })
+    assertAlmostEquals(matrix.at(0), 0.002499, epsilon);
+    assertEquals(matrix.at(1), 0.0);
+    assertEquals(matrix.at(2), 0.0);
+    assertEquals(matrix.at(3), 0.0);
 
-  it('computes orthographic projection', () => {
-    const matrix = mat4.orthographic(0, 800, 0, 600, 1, 100)
+    assertEquals(matrix.at(4), 0.0);
+    assertAlmostEquals(matrix.at(5), 0.003333, epsilon);
+    assertEquals(matrix.at(6), 0.0);
+    assertEquals(matrix.at(7), 0.0);
 
-    expect(matrix.at(0)).to.be.approximately(0.002499, epsilon)
-    expect(matrix.at(1)).to.equal(0.0)
-    expect(matrix.at(2)).to.equal(0.0)
-    expect(matrix.at(3)).to.equal(0.0)
+    assertEquals(matrix.at(8), 0.0);
+    assertEquals(matrix.at(9), 0.0);
+    assertAlmostEquals(matrix.at(10), -0.020202, epsilon);
+    assertEquals(matrix.at(11), 0.0);
 
-    expect(matrix.at(4)).to.equal(0.0)
-    expect(matrix.at(5)).to.be.approximately(0.003333, epsilon)
-    expect(matrix.at(6)).to.equal(0.0)
-    expect(matrix.at(7)).to.equal(0.0)
-
-    expect(matrix.at(8)).to.equal(0.0)
-    expect(matrix.at(9)).to.equal(0.0)
-    expect(matrix.at(10)).to.be.approximately(-0.020202, epsilon)
-    expect(matrix.at(11)).to.equal(0.0)
-
-    expect(matrix.at(12)).to.equal(-1.0)
-    expect(matrix.at(13)).to.equal(-1.0)
-    expect(matrix.at(14)).to.be.approximately(-1.020202, epsilon)
-    expect(matrix.at(15)).to.equal(1.0)
-
-  })
-
-})
+    assertEquals(matrix.at(12), -1.0);
+    assertEquals(matrix.at(13), -1.0);
+    assertAlmostEquals(matrix.at(14), -1.020202, epsilon);
+    assertEquals(matrix.at(15), 1.0);
+  });
+});

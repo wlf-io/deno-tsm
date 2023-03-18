@@ -1,38 +1,37 @@
-import { expect } from 'chai'
-import 'mocha'
+import { assertEquals } from "https://deno.land/std@0.180.0/testing/asserts.ts";
 
-import mat2 from '../src/mat2'
+import mat2 from "../src/mat2.ts";
 
-import { epsilon } from '../src/constants'
-
-describe('mat2', () => {
-
-  it('transposes', () => {
+Deno.test("mat2", async (t) => {
+  await t.step("transposes", () => {
     const matrix = new mat2([
-        1.0, 2.0,
-        3.0, 4.0,
-    ])
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+    ]);
 
-    matrix.transpose()
+    matrix.transpose();
 
-    expect(matrix.at(0)).to.equal(1.0)
-    expect(matrix.at(1)).to.equal(3.0)
-    expect(matrix.at(2)).to.equal(2.0)
-    expect(matrix.at(3)).to.equal(4.0)
-  })
+    assertEquals(matrix.at(0), 1.0);
+    assertEquals(matrix.at(1), 3.0);
+    assertEquals(matrix.at(2), 2.0);
+    assertEquals(matrix.at(3), 4.0);
+  });
 
-  it('inverses', () => {
+  await t.step("inverses", () => {
     const matrix = new mat2([
-        1.0, 2.0,
-        3.0, 4.0,
-    ])
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+    ]);
 
-    matrix.inverse()
+    matrix.inverse();
 
-    expect(matrix.at(0)).to.equal(-2.0)
-    expect(matrix.at(1)).to.equal(1.0)
-    expect(matrix.at(2)).to.equal(1.5)
-    expect(matrix.at(3)).to.equal(-0.5)
-  })
-
-})
+    assertEquals(matrix.at(0), -2.0);
+    assertEquals(matrix.at(1), 1.0);
+    assertEquals(matrix.at(2), 1.5);
+    assertEquals(matrix.at(3), -0.5);
+  });
+});

@@ -1,3 +1,6 @@
+This is a fork of Matthias Ferch's [TSM](https://github.com/matthiasferch/tsm) vecctor/matrix math library setup for use with deno.
+
+
 tsm: A Typescript vector and matrix math library
 =================================================
 
