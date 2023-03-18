@@ -9,8 +9,16 @@ export default class vec2 {
     return this.values[0];
   }
 
+  set x(value: number) {
+    this.values[0] = value;
+  }
+
   get y(): number {
     return this.values[1];
+  }
+
+  set y(value: number) {
+    this.values[1] = value;
   }
 
   get xy(): [number, number] {
@@ -18,14 +26,6 @@ export default class vec2 {
       this.values[0],
       this.values[1],
     ];
-  }
-
-  set x(value: number) {
-    this.values[0] = value;
-  }
-
-  set y(value: number) {
-    this.values[1] = value;
   }
 
   set xy(values: [number, number]) {

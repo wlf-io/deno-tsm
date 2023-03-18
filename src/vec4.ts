@@ -7,16 +7,32 @@ export default class vec4 {
     return this.values[0];
   }
 
+  set x(value: number) {
+    this.values[0] = value;
+  }
+
   get y(): number {
     return this.values[1];
+  }
+
+  set y(value: number) {
+    this.values[1] = value;
   }
 
   get z(): number {
     return this.values[2];
   }
 
+  set z(value: number) {
+    this.values[2] = value;
+  }
+
   get w(): number {
     return this.values[3];
+  }
+
+  set w(value: number) {
+    this.values[3] = value;
   }
 
   get xy(): [number, number] {
@@ -24,6 +40,11 @@ export default class vec4 {
       this.values[0],
       this.values[1],
     ];
+  }
+
+  set xy(values: [number, number]) {
+    this.values[0] = values[0];
+    this.values[1] = values[1];
   }
 
   get xyz(): [number, number, number] {
@@ -34,6 +55,12 @@ export default class vec4 {
     ];
   }
 
+  set xyz(values: [number, number, number]) {
+    this.values[0] = values[0];
+    this.values[1] = values[1];
+    this.values[2] = values[2];
+  }
+
   get xyzw(): [number, number, number, number] {
     return [
       this.values[0],
@@ -41,33 +68,6 @@ export default class vec4 {
       this.values[2],
       this.values[3],
     ];
-  }
-
-  set x(value: number) {
-    this.values[0] = value;
-  }
-
-  set y(value: number) {
-    this.values[1] = value;
-  }
-
-  set z(value: number) {
-    this.values[2] = value;
-  }
-
-  set w(value: number) {
-    this.values[3] = value;
-  }
-
-  set xy(values: [number, number]) {
-    this.values[0] = values[0];
-    this.values[1] = values[1];
-  }
-
-  set xyz(values: [number, number, number]) {
-    this.values[0] = values[0];
-    this.values[1] = values[1];
-    this.values[2] = values[2];
   }
 
   set xyzw(values: [number, number, number, number]) {
@@ -81,16 +81,32 @@ export default class vec4 {
     return this.values[0];
   }
 
+  set r(value: number) {
+    this.values[0] = value;
+  }
+
   get g(): number {
     return this.values[1];
+  }
+
+  set g(value: number) {
+    this.values[1] = value;
   }
 
   get b(): number {
     return this.values[2];
   }
 
+  set b(value: number) {
+    this.values[2] = value;
+  }
+
   get a(): number {
     return this.values[3];
+  }
+
+  set a(value: number) {
+    this.values[3] = value;
   }
 
   get rg(): [number, number] {
@@ -98,6 +114,11 @@ export default class vec4 {
       this.values[0],
       this.values[1],
     ];
+  }
+
+  set rg(values: [number, number]) {
+    this.values[0] = values[0];
+    this.values[1] = values[1];
   }
 
   get rgb(): [number, number, number] {
@@ -108,6 +129,12 @@ export default class vec4 {
     ];
   }
 
+  set rgb(values: [number, number, number]) {
+    this.values[0] = values[0];
+    this.values[1] = values[1];
+    this.values[2] = values[2];
+  }
+
   get rgba(): [number, number, number, number] {
     return [
       this.values[0],
@@ -115,33 +142,6 @@ export default class vec4 {
       this.values[2],
       this.values[3],
     ];
-  }
-
-  set r(value: number) {
-    this.values[0] = value;
-  }
-
-  set g(value: number) {
-    this.values[1] = value;
-  }
-
-  set b(value: number) {
-    this.values[2] = value;
-  }
-
-  set a(value: number) {
-    this.values[3] = value;
-  }
-
-  set rg(values: [number, number]) {
-    this.values[0] = values[0];
-    this.values[1] = values[1];
-  }
-
-  set rgb(values: [number, number, number]) {
-    this.values[0] = values[0];
-    this.values[1] = values[1];
-    this.values[2] = values[2];
   }
 
   set rgba(values: [number, number, number, number]) {

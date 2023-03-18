@@ -8,12 +8,24 @@ export default class vec3 {
     return this.values[0];
   }
 
+  set x(value: number) {
+    this.values[0] = value;
+  }
+
   get y(): number {
     return this.values[1];
   }
 
+  set y(value: number) {
+    this.values[1] = value;
+  }
+
   get z(): number {
     return this.values[2];
+  }
+
+  set z(value: number) {
+    this.values[2] = value;
   }
 
   get xy(): [number, number] {
@@ -23,29 +35,17 @@ export default class vec3 {
     ];
   }
 
+  set xy(values: [number, number]) {
+    this.values[0] = values[0];
+    this.values[1] = values[1];
+  }
+
   get xyz(): [number, number, number] {
     return [
       this.values[0],
       this.values[1],
       this.values[2],
     ];
-  }
-
-  set x(value: number) {
-    this.values[0] = value;
-  }
-
-  set y(value: number) {
-    this.values[1] = value;
-  }
-
-  set z(value: number) {
-    this.values[2] = value;
-  }
-
-  set xy(values: [number, number]) {
-    this.values[0] = values[0];
-    this.values[1] = values[1];
   }
 
   set xyz(values: [number, number, number]) {
@@ -261,10 +261,6 @@ export default class vec3 {
   }
 
   static distance(vector: vec3, vector2: vec3): number {
-    const x = vector2.x - vector.x;
-    const y = vector2.y - vector.y;
-    const z = vector2.z - vector.z;
-
     return Math.sqrt(this.squaredDistance(vector, vector2));
   }
 
